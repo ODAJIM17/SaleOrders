@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Orders.Backend.Data;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllers();
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -24,5 +26,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors(c => c
+.AllowAnyMethod()
+ .AllowAnyHeader()
+ .SetIsOriginAllowed(origin => true)
+ .AllowCredentials());
 
 app.Run();
