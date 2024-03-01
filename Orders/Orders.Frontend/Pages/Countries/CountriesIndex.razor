@@ -1,0 +1,46 @@
+﻿@page "/countries"
+
+@inject IRepository repository
+
+<h4 class="text-muted">Countries List</h4>
+@if (Countries is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Country Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var country in Countries!)
+            {
+                <tr>
+                    <td>@country.Name</td>
+                    <td>
+                        <a class="btn btn-warning">Edit</a>
+                        <button class="btn btn-danger">Del</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    public List<Country>? Countries { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var responseHttp = await repository.GetAsync<List<Country>>("api/countries");
+        Countries = responseHttp.Response;
+    }
+
+}
