@@ -1,46 +1,30 @@
 ﻿@page "/countries"
 
-@inject IRepository repository
-
 <h4 class="text-muted">Countries List</h4>
-@if (Countries is null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Country Name</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var country in Countries!)
-            {
+
+<GenericList IndexList="Countries">
+    <Body>
+        <table class="table table-striped table-hover smfont">
+            <thead>
                 <tr>
-                    <td>@country.Name</td>
-                    <td>
-                        <a class="btn btn-warning">Edit</a>
-                        <button class="btn btn-danger">Del</button>
-                    </td>
+                    <th>Country Name</th>
+                    <th> <a class="btn btn-sm btn-primary" href="/countries/create">Add Country</a></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                @foreach (var country in Countries!)
+                {
+                    <tr>
+                        <td>@country.Name</td>
+                        <td>
+                            <a href="/countries/edit/@country.Id" class="btn btn-sm btn-warning">Edit</a>
+                            <button @onclick=@(() => DeleteAsycn(country)) class="btn btn-sm btn-danger">Del</button>
+                        </td>
+                        <td></td>
+                    </tr>
 
-
-@code {
-    public List<Country>? Countries { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        await base.OnInitializedAsync();
-
-        var responseHttp = await repository.GetAsync<List<Country>>("api/countries");
-        Countries = responseHttp.Response;
-    }
-
-}
+                }
+            </tbody>
+        </table>
+    </Body>
+</GenericList>

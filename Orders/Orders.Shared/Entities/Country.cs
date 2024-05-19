@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Orders.Shared.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Orders.Shared.Entities
 {
-    public class Country
+    public class Country : IEntityWithName
     {
         [Key]
         public int Id { get; set; }
@@ -10,7 +11,7 @@ namespace Orders.Shared.Entities
         [Display(Name = "Country")]
         [MaxLength(100, ErrorMessage = "Field {0} allows max {1} characters")]
         [Required(ErrorMessage = "Field {0} is required.")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = null!;
 
         // public ICollection<State> States { get; set; }
 

@@ -1,0 +1,9 @@
+﻿@page "/categories/create"
+
+<PageTitle>
+    Create Category
+</PageTitle>
+
+<h3>Add Category</h3>
+
+<FormWithName @ref="categoryForm" Label="Category: " Model="category" OnValidSubmit="CreateAsync" ReturnAction="Return" />

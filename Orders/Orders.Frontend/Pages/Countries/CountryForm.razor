@@ -1,0 +1,14 @@
+﻿<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
+
+<EditForm Enhance="true" EditContext="editContext" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="mb-3">
+        <label>Country:</label>
+        <div>
+            <InputText class="form-control shadow-none smfont" @bind-Value="@Country.Name" />
+            <ValidationMessage For="@(() => Country.Name)" />
+        </div>
+    </div>
+    <button class="btn btn-sm btn-primary" type="submit">Save</button>
+    <button class="btn btn-sm btn-success" @onclick="ReturnAction">Return</button>
+</EditForm>
