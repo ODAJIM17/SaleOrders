@@ -13,10 +13,10 @@ namespace Orders.Shared.Entities
         [Required(ErrorMessage = "Field {0} is required.")]
         public string Name { get; set; } = null!;
 
-        // public ICollection<State> States { get; set; }
+        public ICollection<State>? States { get; set; }
 
-        // [Display(Name = "State Count")]
-        // public int StatesCount => States == null ? 0 : States.Count;
+        [Display(Name = "States")]
+        public int StatesNumber => States == null || States.Count == 0 ? 0 : States.Count;
 
         ///[Display(Name = "Cities")]
         // public int CitiesCount => States == null ? 0 : States.Sum(s => s.CitiesCount);
